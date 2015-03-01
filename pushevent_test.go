@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func rawJson() (raw []byte) {
+func RawJson() (raw []byte) {
 	raw, err := ioutil.ReadFile("_support/push.json")
 	if err != nil {
 		panic(err)
@@ -16,39 +16,39 @@ func rawJson() (raw []byte) {
 	return
 }
 
-func unmarshalJson() (push PushEvent) {
-	if err := json.Unmarshal(rawJson(), &push); err != nil {
+func UnmarshalJson() (push PushEvent) {
+	if err := json.Unmarshal(RawJson(), &push); err != nil {
 		panic(err)
 	}
 	return
 }
 
 func TestPushEvent_Branch(T *testing.T) {
-	push := unmarshalJson()
+	push := UnmarshalJson()
 
 	Go(T).AssertEqual(push.Branch(), "gh-pages")
 }
 
 func TestPushEvent_ByOwner(T *testing.T) {
-	push := unmarshalJson()
+	push := UnmarshalJson()
 
 	Go(T).Assert(push.ByOwner())
 }
 
 func TestPushEvent_ByAdmin(T *testing.T) {
-	push := unmarshalJson()
+	push := UnmarshalJson()
 
 	Go(T).Assert(push.ByAdmin())
 }
 
 func TestPushEvent_ToMaster(T *testing.T) {
-	push := unmarshalJson()
+	push := UnmarshalJson()
 
 	Go(T).Refute(push.ToMaster())
 }
 
 func Example() {
-	data := rawJson()
+	data := RawJson()
 
 	var push PushEvent
 	json.Unmarshal(data, &push)

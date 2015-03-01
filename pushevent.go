@@ -2,6 +2,9 @@ package main
 
 import "strings"
 
+// PushEvent for parsing json data when recieving a push even from
+// github's web hook.
+//
 // Note: comment out that which I don't need currently.
 // For json see: https://developer.github.com/v3/activity/events/types/#pushevent
 type PushEvent struct {
@@ -32,6 +35,8 @@ type PushEvent struct {
 	} `json:"repository"`
 }
 
+// Branch returns the truncated branch name referenced in push event
+// as a string.
 func (e PushEvent) Branch() (b string) {
 	prefix := "refs/heads/"
 	if strings.HasPrefix(e.Ref, prefix) {
@@ -41,14 +46,19 @@ func (e PushEvent) Branch() (b string) {
 	return
 }
 
+// ByOwner compares the repository owner and push even sender for
+// equality, returning a bool.
 func (e PushEvent) ByOwner() bool {
 	return e.Sender.Login == e.Repository.Owner.Name
 }
 
+// ByAdmin returns wheather the push event sender is a site admin.
 func (e PushEvent) ByAdmin() bool {
 	return e.Sender.SiteAdmin
 }
 
+// ToMaster compares the branch and repository master branch  for
+// equality, returning a bool
 func (e PushEvent) ToMaster() bool {
 	return e.Branch() == e.Repository.MasterBranch
 }
