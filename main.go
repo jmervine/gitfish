@@ -46,6 +46,14 @@ func main() {
 	})
 
 	log.Printf("Starting on *:%s\n", port)
+	log.Println("---")
+	log.Println("Configuration")
+	log.Printf(" - Command : %v\n", action)
+	log.Printf(" - Branches: %v\n", conditions.Branches)
+	log.Printf(" - Secret  : %v\n", !!(len(conditions.Secret) > 0))
+	log.Printf(" - Owner   : %v\n", conditions.Owner)
+	log.Printf(" - Admin   : %v\n", conditions.Admin)
+	log.Printf(" - Master  : %v\n", conditions.Admin)
 	log.Panic(http.ListenAndServe(":"+port, nil))
 }
 

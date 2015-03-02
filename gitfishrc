@@ -1,0 +1,11 @@
+# REQUIRED
+export FISH_COMMAND="echo foobar"
+
+# Optional
+export FISH_BRANCH="master,develop,gh-pages"
+export FISH_SECRET="mysecret"
+export FISH_PORT=8888
+export FISH_VERIFY=true
+export FISH_OWNER=false
+export FISH_ADMIN=false
+export FISH_MASTER=false

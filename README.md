@@ -32,6 +32,7 @@ $ ./gitfish help
 #### Usage
 
 ```
+$ gitfish help
 NAME:
    gitfish - http listener and handler for github post commit hooks
 
@@ -58,4 +59,30 @@ GLOBAL OPTIONS:
    --master             filer, require branch be assigned as master branch [$FISH_MASTER]
    --help, -h           show help
    --version, -v        print the version
+```
+
+### `gitfishrc`
+
+```
+$ source gitfishrc; gitfish
+```
+
+### Docker
+
+```
+# with gitfishrc - default
+###
+
+$ docker run -d --name gitfish -v $(pwd)/gitfishrc:/gitfishrc jmervine/gitfish
+
+# without gitfishrc
+###
+
+$ docker run -d --name gitfish jmervine/gitfish gitfish \
+    --command "echo foobar" \
+    --port 8888 \
+    --secret mysecret \
+    --branches "master,develop"
+    # ... etc. ...
+
 ```
