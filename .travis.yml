@@ -1,0 +1,15 @@
+language: go
+
+install:
+  #- go get github.com/codegangsta/cli
+  #- go get github.com/jmervine/exec
+  #- go get github.com/jmervine/GoT
+  - go get github.com/jmervine/go-git-fish
+
+go:
+  - 1.0
+  - 1.1
+  - 1.2
+  - 1.3
+  - tip
+
