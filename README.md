@@ -1,10 +1,12 @@
-## GitFish
+### GitFish
 
 Simple HTTP listener for Github post commit hooks.
 
 > Why 'GitFish'?
 >
 > What receives a hook?!
+
+[![Build Status](https://travis-ci.org/jmervine/gitfish.svg?branch=master)](https://travis-ci.org/jmervine/gitfish)
 
 #### Install
 
