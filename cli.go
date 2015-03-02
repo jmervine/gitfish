@@ -10,7 +10,7 @@ import (
 
 func CliHandler(args []string) (port string, action []string, conditions Conditions) {
 	app := cli.NewApp()
-	app.Name = "go-git-fish"
+	app.Name = "gitfish"
 	app.Version = "0.0.1"
 	app.Author = "Joshua Mervine"
 	app.Email = "joshua@mervine.net"
