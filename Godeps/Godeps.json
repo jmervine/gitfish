@@ -1,0 +1,19 @@
+{
+	"ImportPath": "github.com/jmervine/go-git-fish",
+	"GoVersion": "go1.3.3",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-74-g50c77ec",
+			"Rev": "50c77ecec0068c9aef9d90ae0fd0fdf410041da3"
+		},
+		{
+			"ImportPath": "github.com/jmervine/GoT",
+			"Rev": "1ce8eabae3eda43f16e7d9335bafcdb6a50362ae"
+		},
+		{
+			"ImportPath": "github.com/jmervine/exec/v2",
+			"Rev": "43a326c1f83eb37719e8018e3145ba3e3112e98c"
+		}
+	]
+}
