@@ -1,9 +1,9 @@
 language: go
 
 install:
-  #- go get github.com/codegangsta/cli
-  #- go get github.com/jmervine/exec
-  #- go get github.com/jmervine/GoT
+  - go get github.com/codegangsta/cli
+  - go get github.com/jmervine/exec/v2
+  - go get github.com/jmervine/GoT
   - go get github.com/jmervine/gitfish
 
 go:
