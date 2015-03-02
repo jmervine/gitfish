@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func CliHandler(args []string) (action []string, conditions Conditions) {
+func CliHandler(args []string) (port string, action []string, conditions Conditions) {
 	app := cli.NewApp()
 	app.Name = "go-git-fish"
 	app.Version = "0.0.1"
@@ -21,6 +21,12 @@ func CliHandler(args []string) (action []string, conditions Conditions) {
 			Name:   "command,c",
 			Usage:  "command to execute *required*",
 			EnvVar: "FISH_COMMAND",
+		},
+		cli.StringFlag{
+			Name:   "port,p",
+			Usage:  "http listener port",
+			Value:  "8888",
+			EnvVar: "FISH_PORT",
 		},
 		cli.BoolFlag{
 			Name:   "verify",
@@ -81,8 +87,6 @@ func CliHandler(args []string) (action []string, conditions Conditions) {
 		conditions.Admin = c.Bool("admin")
 		conditions.Master = c.Bool("master")
 	}
-
-	action = safeSplit("/bin/bash -l -c 'echo \"foo bar bin bah boo\"'")
 
 	app.Run(args)
 

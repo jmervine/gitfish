@@ -10,7 +10,12 @@ import (
 )
 
 func main() {
-	action, conditions := CliHandler(os.Args)
+	port, action, conditions := CliHandler(os.Args)
+
+	if len(action) == 0 {
+		os.Exit(1)
+	}
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		decoder := json.NewDecoder(r.Body)
 
@@ -34,8 +39,8 @@ func main() {
 		w.WriteHeader(200)
 	})
 
-	log.Println("Starting on *:8888")
-	log.Panic(http.ListenAndServe(":8888", nil))
+	log.Printf("Starting on *:%s\n", port)
+	log.Panic(http.ListenAndServe(":"+port, nil))
 }
 
 // safeSplit handles quoting well for commands
