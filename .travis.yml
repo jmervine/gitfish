@@ -4,11 +4,9 @@ install:
   #- go get github.com/codegangsta/cli
   #- go get github.com/jmervine/exec
   #- go get github.com/jmervine/GoT
-  - go get github.com/jmervine/go-git-fish
+  - go get github.com/jmervine/gitfish
 
 go:
-  - 1.0
-  - 1.1
   - 1.2
   - 1.3
   - tip
