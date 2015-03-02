@@ -9,7 +9,10 @@ func TestConditions_AreMet(T *testing.T) {
 	// from: pushevent_test.go
 	push := UnmarshalJson()
 
-	good := Conditions{Branch: "gh-pages"}
+	good := Conditions{}
+	Go(T).Assert(good.AreMet(push))
+
+	good = Conditions{Branches: []string{"gh-pages"}}
 	Go(T).Assert(good.AreMet(push))
 
 	g1 := good
@@ -22,7 +25,7 @@ func TestConditions_AreMet(T *testing.T) {
 
 	// bad
 	b1 := good
-	b1.Branch = "master"
+	b1.Branches = []string{"master"}
 	Go(T).Refute(b1.AreMet(push))
 
 	b2 := good
