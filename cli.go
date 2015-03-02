@@ -34,9 +34,9 @@ func CliHandler(args []string) (port string, action []string, conditions Conditi
 			EnvVar: "FISH_VERIFY",
 		},
 		cli.StringFlag{
-			Name:   "token,t",
-			Usage:  "require a token to be passed via query string",
-			EnvVar: "FISH_TOKEN",
+			Name:   "secret,s",
+			Usage:  "require a secret to be passed by github",
+			EnvVar: "FISH_SECRET",
 		},
 		cli.StringFlag{
 			Name:   "branches,b",
@@ -82,7 +82,8 @@ func CliHandler(args []string) (port string, action []string, conditions Conditi
 			conditions.Branches = branches
 		}
 
-		conditions.Token = c.String("token")
+		port = c.String("port")
+		conditions.Secret = c.String("secret")
 		conditions.Owner = c.Bool("owner")
 		conditions.Admin = c.Bool("admin")
 		conditions.Master = c.Bool("master")

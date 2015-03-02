@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"github.com/jmervine/exec/v2"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -17,14 +18,19 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		decoder := json.NewDecoder(r.Body)
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			log.Println(err)
+			return
+		}
 
 		var push PushEvent
-		if err := decoder.Decode(&push); err != nil {
+		if err := json.Unmarshal(body, &push); err != nil {
 			log.Println(err)
 		}
 
-		if conditions.Auth(r) && conditions.AreMet(push) {
+		sig := r.Header.Get("X-Hub-Signature")
+		if conditions.Auth(body, sig) && conditions.AreMet(push) {
 			if _, _, err := exec.ExecTee2(os.Stdout, os.Stderr, action[0], action[1:]...); err != nil {
 				log.Println(err)
 				w.WriteHeader(500)

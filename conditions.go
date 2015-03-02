@@ -1,37 +1,41 @@
 package main
 
 import (
-	"net/http"
+	"crypto/hmac"
+	"crypto/sha1"
+	"encoding/hex"
+	"log"
+	"strings"
 )
 
 type Conditions struct {
 	Branches []string
-	Token    string
+	Secret   string
 	Owner    bool
 	Admin    bool
 	Master   bool
 }
 
-func (c Conditions) Auth(r *http.Request) bool {
-	// TODO: check and see if github support basic auth and if
-	// so replace simple token auth with basic auth.
-
-	if c.Token == "" {
+func (c Conditions) Auth(body []byte, sig string) bool {
+	if c.Secret == "" {
 		return true
 	}
 
-	// intentionally restrictive
-	var token string
-	for k := range r.URL.Query() {
-		token = k
-		break // get first key
+	if sig == "" {
+		return false
 	}
 
-	if c.Token == token {
-		return true
-	}
+	hasher := hmac.New(sha1.New, []byte(c.Secret))
+	hasher.Write(body)
+	expected := []byte(hex.EncodeToString(hasher.Sum(nil)))
+	recieved := []byte(strings.Split(sig, "=")[1])
 
-	return false
+	passed := hmac.Equal(expected, recieved)
+
+	if !passed {
+		log.Println("X-Hub-Signature check failed")
+	}
+	return passed
 }
 
 func (c Conditions) AreMet(p PushEvent) bool {
