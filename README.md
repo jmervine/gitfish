@@ -1,5 +1,7 @@
 ### GitFish
 
+[![Join the chat at https://gitter.im/jmervine/gitfish](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jmervine/gitfish?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Simple HTTP listener for Github post commit hooks.
 
 > Why 'GitFish'?
