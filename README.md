@@ -11,7 +11,7 @@ Simple HTTP listener for Github post commit hooks.
 #### Install
 
 ```
-go get -u github.com/jmervine/gitfish
+go get -u github.com/jmervine/gitfish/v1
 ```
 
 > Note: ensure `GOBIN` environment variable is set.
